@@ -425,36 +425,6 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
-					},
-					{
-						"activity": "db_end_cli",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "db_logradouro",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "db_bairro",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "db_cidade",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "db_estado",
-						"dependencyConditions": [
-							"Succeeded"
-						]
 					}
 				],
 				"policy": {
