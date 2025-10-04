@@ -409,6 +409,117 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "db_cliente",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "db_cli_fisica",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "db_end_cli",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "db_logradouro",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "db_bairro",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "db_cidade",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "db_estado",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_cp_rm554613",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"cliente": {
+								"nome_do_arquivo": {
+									"value": "@activity('db_cliente').output",
+									"type": "Expression"
+								}
+							},
+							"clifisica": {
+								"nome_do_arquivo": {
+									"value": "@activity('db_cli_fisica').output",
+									"type": "Expression"
+								}
+							},
+							"enderecocliente": {
+								"nome_do_arquivo": {
+									"value": "@activity('db_end_cli').output",
+									"type": "Expression"
+								}
+							},
+							"logradouro": {
+								"nome_do_arquivo": {
+									"value": "@activity('db_logradouro').output",
+									"type": "Expression"
+								}
+							},
+							"bairro": {
+								"nome_do_arquivo": {
+									"value": "@activity('db_bairro').output",
+									"type": "Expression"
+								}
+							},
+							"cidade": {
+								"nome_do_arquivo": {
+									"value": "@activity('db_cidade').output",
+									"type": "Expression"
+								}
+							},
+							"estado": {
+								"nome_do_arquivo": {
+									"value": "@activity('db_estado').output",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"annotations": []

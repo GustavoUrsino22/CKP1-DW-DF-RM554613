@@ -1,0 +1,93 @@
+{
+	"name": "df_cp_rm554613",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "armazena_dados",
+						"type": "DatasetReference"
+					},
+					"name": "cliente"
+				},
+				{
+					"dataset": {
+						"referenceName": "armazena_dados",
+						"type": "DatasetReference"
+					},
+					"name": "clifisica"
+				},
+				{
+					"dataset": {
+						"referenceName": "armazena_dados",
+						"type": "DatasetReference"
+					},
+					"name": "enderecocliente"
+				},
+				{
+					"dataset": {
+						"referenceName": "armazena_dados",
+						"type": "DatasetReference"
+					},
+					"name": "logradouro"
+				},
+				{
+					"dataset": {
+						"referenceName": "armazena_dados",
+						"type": "DatasetReference"
+					},
+					"name": "bairro"
+				},
+				{
+					"dataset": {
+						"referenceName": "armazena_dados",
+						"type": "DatasetReference"
+					},
+					"name": "cidade"
+				},
+				{
+					"dataset": {
+						"referenceName": "armazena_dados",
+						"type": "DatasetReference"
+					},
+					"name": "estado"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> cliente",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> clifisica",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> enderecocliente",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> logradouro",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> bairro",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> cidade",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> estado",
+				"cliente, clifisica join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
+			]
+		}
+	}
+}
