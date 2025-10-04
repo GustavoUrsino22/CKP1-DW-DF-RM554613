@@ -18,7 +18,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select *\nfrom dburger.db_cliente cli;",
+						"oracleReaderQuery": "SELECT NR_CLIENTE,\nDT_NASCIMENTO,\nFL_SEXO_BIOLOGICO,\nDS_GENERO,\nNR_CPF\nFROM DBURGER.DB_CLI_FISICA;",
 						"partitionOption": "None",
 						"numberPrecision": 38,
 						"numberScale": 18,
@@ -77,7 +77,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select *\nfrom dburger.db_cli_fisica;",
+						"oracleReaderQuery": "SELECT NR_CLIENTE,\nCD_LOGRADOURO_CLI,\nNR_END,\nDS_COMPLEMENTO_END,\nDT_INICIO,\nDT_TERMINO,\nST_END\nFROM DBURGER.DB_END_CLI;",
 						"partitionOption": "None",
 						"numberPrecision": 38,
 						"numberScale": 18,
@@ -135,7 +135,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select * \nfrom dburger.db_end_cli;",
+						"oracleReaderQuery": "select \n    nr_cliente,\n    cd_logradouro_cli\nfrom db_end_cli;",
 						"partitionOption": "None",
 						"numberPrecision": 38,
 						"numberScale": 18,
@@ -180,6 +180,7 @@
 			},
 			{
 				"name": "db_logradouro",
+				"description": "SELECT CD_LOGRADOURO,\nCD_BAIRRO,\nNM_LOGRADOURO,\nNR_CEP\nFROM DBURGER.DB_LOGRADOURO;",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -251,7 +252,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select * \nfrom db_bairro;",
+						"oracleReaderQuery": "SELECT CD_BAIRRO,\nCD_CIDADE,\nNM_BAIRRO,\nNM_ZONA_BAIRRO\nFROM DBURGER.DB_BAIRRO;",
 						"partitionOption": "None",
 						"numberPrecision": 38,
 						"numberScale": 18,
@@ -309,7 +310,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select * \nfrom db_cidade;",
+						"oracleReaderQuery": "SELECT CD_CIDADE,\nSG_ESTADO,\nNM_CIDADE,\nCD_IBGE,\nNR_DDD\nFROM DBURGER.DB_CIDADE;",
 						"partitionOption": "None",
 						"numberPrecision": 38,
 						"numberScale": 18,
@@ -367,7 +368,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "select * \nfrom db_estado;",
+						"oracleReaderQuery": "SELECT SG_ESTADO,\nNM_ESTADO\nFROM DBURGER.DB_ESTADO;",
 						"partitionOption": "None",
 						"numberPrecision": 38,
 						"numberScale": 18,
@@ -411,7 +412,7 @@
 				]
 			},
 			{
-				"name": "Data flow1",
+				"name": "fluxockprm554613",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -438,51 +439,7 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "df_cp_rm554613",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"cliente": {
-								"nome_do_arquivo": {
-									"value": "@activity('db_cliente').output",
-									"type": "Expression"
-								}
-							},
-							"clifisica": {
-								"nome_do_arquivo": {
-									"value": "@activity('db_cli_fisica').output",
-									"type": "Expression"
-								}
-							},
-							"enderecocliente": {
-								"nome_do_arquivo": {
-									"value": "@activity('db_end_cli').output",
-									"type": "Expression"
-								}
-							},
-							"logradouro": {
-								"nome_do_arquivo": {
-									"value": "@activity('db_logradouro').output",
-									"type": "Expression"
-								}
-							},
-							"bairro": {
-								"nome_do_arquivo": {
-									"value": "@activity('db_bairro').output",
-									"type": "Expression"
-								}
-							},
-							"cidade": {
-								"nome_do_arquivo": {
-									"value": "@activity('db_cidade').output",
-									"type": "Expression"
-								}
-							},
-							"estado": {
-								"nome_do_arquivo": {
-									"value": "@activity('db_estado').output",
-									"type": "Expression"
-								}
-							}
-						}
+						"type": "DataFlowReference"
 					},
 					"compute": {
 						"coreCount": 8,
